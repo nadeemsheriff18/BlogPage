@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Audiowide">
+  
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-section">
+      <h1>The Silicon Valley</h1>
+      <div class="sub-header">
+        <h2>Dive into the latest tech buzz</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-wrap">
+  <div class="container">
+    
+    <a id="newPostBtn" href="/new">New Post</a>
+    <ul id="postsList">
+      <% posts.forEach(post=> { %>
+        <li>
+          <h3>
+            <%=post.title%>
+          </h3>
+          <small>
+            <%=post.date %>
+          </small>
+          <p id="content">
+            <%=post.content%>
+          </p>
+          <small>By: <%=post.author%> </small>
+          <a class="edit" href="/edit/<%= post.id %>">Edit</a>
+          <a class="delete" href="/api/posts/delete/<%= post.id %>">Delete</a>
+        </li>
+        <% }); %>
+    </ul>
+  </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+  function parallax_height() {
+  var scroll_top = $(this).scrollTop();
+  var sample_section_top = $(".container").offset().top;
+  var header_height = $(".header-section").outerHeight();
+  $(".container").css({ "margin-top": header_height });
+  $(".header").css({ height: header_height - scroll_top });
+}
+parallax_height();
+$(window).scroll(function() {
+  parallax_height();
+});
+$(window).resize(function() {
+  parallax_height();
+});
+</script>
+
+</html>
